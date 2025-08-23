@@ -1,15 +1,19 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   ShieldCheckIcon,
   HomeIcon,
   UserGroupIcon,
   ArrowUpTrayIcon,
-  ArrowRightOnRectangleIcon
+  ArrowRightOnRectangleIcon,
+  Bars3Icon,
+  XMarkIcon
 } from '@heroicons/react/24/solid';
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const onLogout = () => {
     localStorage.removeItem('token');
@@ -42,8 +46,8 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* Navigation Links */}
-            <div className="flex items-center space-x-6">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -67,11 +71,56 @@ export default function Navbar() {
               </button>
             </div>
 
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="p-2 rounded-md text-gray-700 hover:text-indigo-600 focus:outline-none"
+              >
+                {menuOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div className="px-4 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex items-center text-gray-700 font-medium hover:text-indigo-600 transition-colors ${
+                    location.pathname === link.path ? 'text-indigo-600 underline' : ''
+                  }`}
+                >
+                  {link.icon}
+                  {link.name}
+                </Link>
+              ))}
+
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onLogout();
+                }}
+                className="flex items-center w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors font-medium"
+              >
+                <ArrowRightOnRectangleIcon className="h-5 w-5 mr-1" />
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
-      {/* Add spacing to prevent content being hidden under fixed navbar */}
+      {/* Spacer */}
       <div className="h-20"></div>
     </>
   );
