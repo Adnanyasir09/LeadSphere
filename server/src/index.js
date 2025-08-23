@@ -11,29 +11,46 @@ import { notFound, errorHandler } from './middleware/error.js';
 
 dotenv.config();
 
+// ✅ Validate required env vars before running
 if (!process.env.MONGO_URI || !process.env.JWT_SECRET || !process.env.CLIENT_URL) {
   console.error("❌ Missing required environment variables");
   process.exit(1);
 }
 
 const app = express();
+
+// Middleware
 app.use(express.json({ limit: '2mb' }));
+
+// Logging
 app.use(morgan('dev'));
 
-const allowedOrigins = [
-  process.env.CLIENT_URL,
-  'http://localhost:5173' // keep for dev
-];
+// ✅ CORS setup (allow frontend from Vercel + local dev)
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"];
 
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
-app.get('/', (req, res) => res.send('API is running'));
+// Health check
+app.get('/', (req, res) => res.send('✅ API is running'));
 
+// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/agents', agentRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/assignments', assignmentRoutes);
 
+// Error handlers
 app.use(notFound);
 app.use(errorHandler);
 
