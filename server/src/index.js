@@ -26,7 +26,12 @@ app.use(express.json({ limit: '2mb' }));
 app.use(morgan('dev'));
 
 // ✅ CORS setup (allow frontend from Vercel + local dev)
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173", "https://lead-sphere-pf82.vercel.app/"];
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:5173",
+  "https://lead-sphere-pf82.vercel.app"
+];
+
 
 app.use(
   cors({
