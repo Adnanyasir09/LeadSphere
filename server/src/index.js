@@ -11,10 +11,21 @@ import { notFound, errorHandler } from './middleware/error.js';
 
 dotenv.config();
 
+if (!process.env.MONGO_URI || !process.env.JWT_SECRET || !process.env.CLIENT_URL) {
+  console.error("❌ Missing required environment variables");
+  process.exit(1);
+}
+
 const app = express();
 app.use(express.json({ limit: '2mb' }));
 app.use(morgan('dev'));
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:5173' // keep for dev
+];
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 app.get('/', (req, res) => res.send('API is running'));
 
@@ -29,5 +40,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 connectDB(process.env.MONGO_URI).then(() => {
-  app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`🚀 Server listening on port ${PORT}`));
 });
