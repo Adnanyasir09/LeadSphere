@@ -7,7 +7,8 @@ import {
   ArrowUpTrayIcon,
   ArrowRightOnRectangleIcon,
   Bars3Icon,
-  XMarkIcon
+  XMarkIcon,
+  ArrowsRightLeftIcon
 } from '@heroicons/react/24/solid';
 
 export default function Navbar() {
@@ -29,7 +30,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-50 via-white to-purple-50 shadow-xl">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-300 via-blue-100 to-indigo-300 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
 
@@ -41,7 +42,8 @@ export default function Navbar() {
                   LeadSphere
                 </span>
               </div>
-              <span className="text-sm text-gray-500 mt-1 flex items-center gap-1 font-medium">
+              <span className="text-sm text-gray-600 mt-1 flex items-center gap-1 font-medium">
+                <ArrowsRightLeftIcon className="h-4 w-4 text-gray-800" />
                 A Central Hub for Managing Leads
               </span>
             </Link>

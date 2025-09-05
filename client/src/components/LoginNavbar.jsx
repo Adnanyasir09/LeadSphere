@@ -3,7 +3,7 @@ import { ShieldCheckIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 
 export default function LoginNavbar() {
   return (
-    <nav className="bg-gradient-to-r from-indigo-50 via-white to-purple-50 shadow-xl">
+    <nav className="bg-gradient-to-r from-indigo-300 via-blue-100 to-indigo-300 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           
@@ -15,8 +15,8 @@ export default function LoginNavbar() {
                 LeadSphere
               </span>
             </div>
-            <span className="text-sm text-gray-500 mt-1 flex items-center gap-1 font-medium">
-              <ArrowsRightLeftIcon className="h-4 w-4 text-gray-400" />
+            <span className="text-sm text-gray-600 mt-1 flex items-center gap-1 font-medium">
+              <ArrowsRightLeftIcon className="h-4 w-4 text-gray-800" />
               A Central Hub for Managing Leads
             </span>
           </Link>

@@ -26,7 +26,7 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-r from-emerald-50 via-white to-teal-50 pt-6 pb-6">
+      <div className="min-h-screen bg-gradient-to-r from-emerald-100 via-white to-teal-100 pt-6 pb-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           {/* Dashboard Heading */}

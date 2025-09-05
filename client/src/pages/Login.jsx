@@ -27,14 +27,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-r from-indigo-200 via-white to-indigo-200">
       {/* Login Navbar */}
       <LoginNavbar />
 
       {/* Centered Login Card */}
       <div className="flex items-center justify-center mt-12">
         <div className="bg-white shadow-xl rounded-xl max-w-md w-full p-8 space-y-6">
-          <h1 className="text-3xl font-bold text-indigo-600 text-center">Admin Login</h1>
+          <h1 className="text-3xl font-extrabold text-indigo-600 text-center tracking-wide font-sans">Admin Login</h1>
           <p className="text-center text-gray-500">Enter your credentials to access the dashboard</p>
 
           <form className="space-y-5" onSubmit={onSubmit}>
